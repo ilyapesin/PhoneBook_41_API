@@ -9,6 +9,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @Builder
-public class AuthResponseModel {
-   private String token;
+public class ErrorModel {
+    int status;
+    String error;
+    Object message;
 }
