@@ -1,3 +1,5 @@
+package okhttp;
+
 import helpers.PropertiesReader;
 import helpers.PropertiesWriter;
 import helpers.TestConfig;
@@ -14,7 +16,7 @@ import java.io.IOException;
 
 public class LoginTest {
     @Test
-    public void loginPositiveTest() throws IOException {
+    public void loginTest() throws IOException {
         AuthRequestModel requestModel = AuthRequestModel
                 .username(PropertiesReader.getProperty("existingUserEmail"))
                 .password(PropertiesReader.getProperty("existingUserPassword"));
