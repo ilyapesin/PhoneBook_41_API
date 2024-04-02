@@ -1,6 +1,7 @@
 package okhttp;
 
 import helpers.PropertiesReader;
+import helpers.PropertiesReaderXML;
 import helpers.TestConfig;
 import models.ContactListModel;
 import models.ContactModel;
@@ -11,20 +12,22 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class GetAllContacts {
+public class GetAllContacts implements TestConfig{
 
     @Test
     public void testGetAllContactsPositive() throws IOException {
         Request request=new Request.Builder()
                 .url(PropertiesReader.getProperty("baseURL")+"v1/contacts")
-                .addHeader("Authorization",PropertiesReader.getProperty("existingToken"))
+                .addHeader(authHeader, PropertiesReaderXML.getProperty("token"))
                 .build()
                 ;
-        Response response= TestConfig.client.newCall(request).execute();
+        Response response= client.newCall(request).execute();
+        System.out.println("Response code: "+response.code());
         String responseBody = response.body().string();
-        System.out.println("Response body: "+responseBody.toString());
+        //System.out.println("Response body: "+responseBody.toString());
         Assert.assertTrue(response.isSuccessful());
-        ContactListModel contactListModel=TestConfig.gson.fromJson(responseBody, ContactListModel.class);
+        ContactListModel contactListModel=gson.fromJson(responseBody, ContactListModel.class);
+        System.out.println(contactListModel.getContacts().size());
         for(ContactModel contactModel : contactListModel.getContacts()) {
             System.out.println(contactModel.getId());
             System.out.println(contactModel.getName());
@@ -33,6 +36,7 @@ public class GetAllContacts {
             System.out.println(contactModel.getPhone());
             System.out.println(contactModel.getAddress());
             System.out.println(contactModel.getDescription());
+
             System.out.println("================================================================");
 
 

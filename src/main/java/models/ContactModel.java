@@ -42,9 +42,9 @@ public class ContactModel {
     }
 
 
-    public ContactModel(String id, String name, String lastName, String email, String phone, String address, String description) {
+    public ContactModel(String name, String lastName, String email, String phone, String address, String description) {
 
-        this.id = id;
+       // this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
