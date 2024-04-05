@@ -26,7 +26,7 @@ public class AddNewContactTest implements TestConfig{
 
         RequestBody requestBody = RequestBody.create(gson.toJson(contactModel), JSON);
         Request request = new Request.Builder()
-                .url(TestConfig.ADD_CONTACT_PATH)
+                .url(ADD_CONTACT_PATH)
                 .addHeader(authHeader, PropertiesReaderXML.getProperty(token))
                 .post(requestBody)
                 .build();
@@ -36,6 +36,8 @@ public class AddNewContactTest implements TestConfig{
         System.out.println("Message is: "+message);
         System.out.println(response.code());
         id = message.substring(message.lastIndexOf(" ") + 1);
+        DatabaseConnection databaseConnection=new DatabaseConnection();
+        databaseConnection.contactDatabaseRecorder(id,contactModel);
         System.out.println("ID is : " + id);
         Assert.assertTrue(response.isSuccessful());
     }
