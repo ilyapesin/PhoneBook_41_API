@@ -6,20 +6,26 @@ import helpers.TestConfig;
 import io.restassured.RestAssured;
 import models.ContactListModel;
 import models.ContactModel;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 
 public class GetAllContacts implements TestConfig {
+    @BeforeTest
+    public void preconditions() throws Exception {
+        RestAssured.baseURI= ADD_CONTACT_PATH;
+    }
     @Test
     public void testGetAllContacts() throws IOException {
-       // RestAssured.baseURI= PropertiesReader.getProperty("baseURL")+"v1/contacts";
+
         ContactListModel contactListModel = given()
                 .header(authHeader, PropertiesReaderXML.getProperty(token))
                 .when()
-                .get(PropertiesReader.getProperty("baseURL") + "v1/contacts")
+                .get(baseURI)
                 .then()
                 .log()
                 .all()
