@@ -9,8 +9,6 @@ import okhttp3.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
-
 public class AddNewContactTest implements TestConfig{
     String id;
     @Test
@@ -36,14 +34,18 @@ public class AddNewContactTest implements TestConfig{
         System.out.println("Message is: "+message);
         System.out.println(response.code());
         id = message.substring(message.lastIndexOf(" ") + 1);
-        DatabaseConnection databaseConnection=new DatabaseConnection();
-        databaseConnection.contactDatabaseRecorder(id,contactModel);
+
+        DataBaseWriter dbw=new DataBaseWriter();
+        dbw.contactDatabaseRecorder(id,contactModel);
+
         System.out.println("ID is : " + id);
         Assert.assertTrue(response.isSuccessful());
     }
     @Test
     public void deleteNewContactTest() throws Exception {
         testAddNewContact();
+        ContactModel contactModel = DataBaseReader.readContactFromDatabase(id);
+        System.out.println("Contact is: "+contactModel.toString());
 
         Request request = new Request.Builder()
                 .url(ADD_CONTACT_PATH+"/"+id)

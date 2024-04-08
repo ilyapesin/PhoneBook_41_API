@@ -41,6 +41,8 @@ public class ContactModel {
         return this;
     }
 
+    public ContactModel() {
+    }
 
     public ContactModel(String name, String lastName, String email, String phone, String address, String description) {
 
@@ -107,5 +109,18 @@ public class ContactModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactModel{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

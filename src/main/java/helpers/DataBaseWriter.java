@@ -7,14 +7,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DatabaseConnection {
+public class DataBaseWriter {
+    String url = "jdbc:mysql://localhost:3306/phonebook";
+    String username = "root";
+    String password = "Vp12345$";
     public void contactDatabaseRecorder(String id, ContactModel contactModel) throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/phonebook";
-        String username = "root";
-        String password = "Vp12345$";
+
+
 
         Connection connection = DriverManager.getConnection(url, username, password);
-        System.out.println("Connection: " + connection);
+       // System.out.println("Connection: " + connection);
 
         String insertQuery = "INSERT INTO contacts(id, name, lastName, email, phone, address, description)"
                 + "VALUES (?,?,?,?,?,?,?)";

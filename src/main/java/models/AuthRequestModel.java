@@ -6,6 +6,7 @@ public class AuthRequestModel {
     private String password;
 
     public static AuthRequestModel username(String username) {
+
         return new AuthRequestModel(username, null);
     }
     public AuthRequestModel password(String password) {
@@ -13,7 +14,7 @@ public class AuthRequestModel {
         return this;
     }
 
-    private AuthRequestModel(String username, String password) {
+    public AuthRequestModel(String username, String password) {
         this.username = username;
         this.password = password;
     }
