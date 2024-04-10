@@ -37,7 +37,9 @@ public class GetAllContacts implements TestConfig{
             System.out.println(contactModel.getAddress());
             System.out.println(contactModel.getDescription());
 
+
             System.out.println("================================================================");
+
 
 
         }

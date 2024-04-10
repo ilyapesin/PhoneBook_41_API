@@ -4,10 +4,12 @@ import helpers.PropertiesReader;
 import helpers.PropertiesReaderXML;
 import helpers.TestConfig;
 import models.ContactListModel;
+import models.ContactModel;
 import models.ContactResponseModel;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -48,4 +50,6 @@ public class DeleteAllContactsTest implements TestConfig {
         Assert.assertTrue(response.isSuccessful());
 
     }
+
+
 }

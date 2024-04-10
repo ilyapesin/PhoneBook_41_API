@@ -45,10 +45,10 @@ public class AddNewContactTest implements TestConfig{
     public void deleteNewContactTest() throws Exception {
         testAddNewContact();
         ContactModel contactModel = DataBaseReader.readContactFromDatabase(id);
-        System.out.println("Contact is: "+contactModel.toString());
+        System.out.println("Contact ID is: "+contactModel.getId());
 
         Request request = new Request.Builder()
-                .url(ADD_CONTACT_PATH+"/"+id)
+                .url(ADD_CONTACT_PATH+"/"+contactModel.getId())
                 .addHeader(authHeader, PropertiesReaderXML.getProperty("token"))
                 .delete()
                 .build();

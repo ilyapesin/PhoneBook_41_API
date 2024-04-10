@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Objects;
+
 public class ContactModel {
 
     private String id;
@@ -122,5 +124,18 @@ public class ContactModel {
                 ", address='" + address + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactModel that = (ContactModel) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(lastName, that.lastName) && Objects.equals(email, that.email) && Objects.equals(phone, that.phone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, lastName, email, phone);
     }
 }
