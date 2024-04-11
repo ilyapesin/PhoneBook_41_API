@@ -102,7 +102,9 @@ public class UpdateContactByID implements TestConfig{
                 System.out.println("--------------------------------");
                 System.out.println("Contact was updated! ID: " +id+ " and found");
                 Assert.assertEquals(contact.getId(), id);
+                break;
             }
+
 
 
         }

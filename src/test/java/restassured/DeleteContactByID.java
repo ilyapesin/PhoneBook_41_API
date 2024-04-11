@@ -65,44 +65,26 @@ public class DeleteContactByID implements TestConfig{
                 .assertThat().body("message", containsString("deleted"))
                 .extract()
                 .as(ContactResponseModel.class);
-        System.out.println("Response message: " + contactResponseModel.getMessage());
+       // System.out.println("Response message: " + contactResponseModel.getMessage());
         id=contactModel.getId();
         System.out.println(id);
     }
     @AfterMethod
     public void postcondition() throws Exception {
-        File logfile=new File("src/logs/testres.log");
-        if (!logfile.exists()) {
-            logfile.getParentFile().mkdirs();
-            logfile.createNewFile();
-
-        }
-        PrintStream printStream=new PrintStream(new FileOutputStream(logfile));
-        System.setOut(printStream);
-        System.setErr(printStream);
 
         ContactListModel contactListModel = given()
                 .header(authHeader, PropertiesReaderXML.getProperty(token))
                 .when()
                 .get(baseURI)
-                .then()
+                .then().log().all()
                 .assertThat()
                 .statusCode(200)
                 .extract()
                 .as(ContactListModel.class);
         for(ContactModel contact : contactListModel.getContacts()) {
-           System.out.println(contact.getId());
-            System.out.println(contact.getName());
-            System.out.println(contact.getLastName());
-            System.out.println(contact.getEmail());
-            System.out.println("--------------------------------");
-            if (!contact.getId().contentEquals(id)) {
-                System.out.println("Contact was added! ID:" +id+ "and not found");
-            }
-            Assert.assertNotEquals(contact.getId(), id);
 
+            Assert.assertNotEquals(contact.getId(), id);
         }
-        printStream.close();
 
 
     }
