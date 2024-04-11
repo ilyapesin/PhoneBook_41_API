@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="50facbdc-a26a-4ce0-940f-339023aafedf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/ContactModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/ContactModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/restassured/GetAllContacts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/restassured/GetAllContacts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/restassured/LoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/restassured/LoginTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logs/testres.log" beforeDir="false" afterPath="$PROJECT_DIR$/src/logs/testres.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/restassured/DeleteContactByID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/restassured/DeleteContactByID.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +71,7 @@
       <recent name="helpers" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.AddNewContactRest.testAddNewContact">
+  <component name="RunManager" selected="Gradle.UpdateContactByID.updateContactTest">
     <configuration name="AddNewContactRest.testAddNewContact" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -87,6 +86,30 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;restassured.AddNewContactRest.testAddNewContact&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="AddNewContactTest.deleteNewContactTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;okhttp.AddNewContactTest.deleteNewContactTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -121,7 +144,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="GetAllContacts.testGetAllContacts" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="DeleteContactByID.testDeleteContactByID" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -134,7 +157,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;restassured.GetAllContacts.testGetAllContacts&quot;" />
+            <option value="&quot;restassured.DeleteContactByID.testDeleteContactByID&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -145,7 +168,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="LoginTest.loginTestNegative" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="UpdateContactByID.updateContactTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -158,31 +181,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;restassured.LoginTest.loginTestNegative&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="RegistrationTest.registrationTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;restassured.RegistrationTest.registrationTest&quot;" />
+            <option value="&quot;restassured.UpdateContactByID.updateContactTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -195,11 +194,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.UpdateContactByID.updateContactTest" />
+        <item itemvalue="Gradle.DeleteContactByID.testDeleteContactByID" />
+        <item itemvalue="Gradle.AddNewContactTest.deleteNewContactTest" />
         <item itemvalue="Gradle.AddNewContactRest.testAddNewContact" />
         <item itemvalue="Gradle.AddNewContactTest.testAddNewContact" />
-        <item itemvalue="Gradle.LoginTest.loginTestNegative" />
-        <item itemvalue="Gradle.GetAllContacts.testGetAllContacts" />
-        <item itemvalue="Gradle.RegistrationTest.registrationTest" />
       </list>
     </recent_temporary>
   </component>

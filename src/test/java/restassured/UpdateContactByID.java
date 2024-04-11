@@ -6,28 +6,27 @@ import io.restassured.http.ContentType;
 import models.ContactListModel;
 import models.ContactModel;
 import models.ContactResponseModel;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.sql.SQLException;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 
-public class DeleteContactByID implements TestConfig{
+public class UpdateContactByID implements TestConfig{
     String id;
+    ContactModel contactModel;
     @BeforeMethod
-    public void precondition() throws Exception {
+    public void beforeMethod() throws SQLException {
         RestAssured.baseURI= ADD_CONTACT_PATH;
-        ContactModel contactModel=new ContactModel(NameAndLastNameGenerator.generateName()
+        contactModel=new ContactModel(NameAndLastNameGenerator.generateName()
                 , NameAndLastNameGenerator.generateLastName()
                 , EmailGenerator.generateEmail(10, 5, 3)
                 , PhoneNumberGenerator.generatePhoneNumber()
@@ -45,32 +44,35 @@ public class DeleteContactByID implements TestConfig{
                 .assertThat().body("message", containsString("added"))
                 .extract()
                 .as(ContactResponseModel.class);
-        System.out.println(responseModel.getMessage());
+      //  System.out.println(responseModel.getMessage());
         id = responseModel.getMessage().substring(responseModel.getMessage().lastIndexOf(" ") + 1);
-       // System.out.println(id);
+      //  System.out.println(id);
         DataBaseWriter dbw=new DataBaseWriter();
         dbw.contactDatabaseRecorder(id,contactModel);
 
     }
     @Test
-    public void testDeleteContactByID() throws Exception {
-        ContactModel contactModel= DataBaseReader.readContactFromDatabase(id);
-        System.out.println("Contact id is: "+contactModel.getId());
-        ContactResponseModel contactResponseModel = given()
+    public void updateContactTest() throws Exception {
+        contactModel=DataBaseReader.readContactFromDatabase(id);
+        String oldEmail=contactModel.getEmail();
+        contactModel.setEmail(EmailGenerator.generateEmail(7,5,3));
+        given()
                 .header(authHeader, PropertiesReaderXML.getProperty(token))
+                .body(contactModel)
+                .contentType(ContentType.JSON)
                 .when()
-                .delete(baseURI + "/" + contactModel.getId())
+                .put()
                 .then().log().all()
-                .assertThat().statusCode(200)
-                .assertThat().body("message", containsString("deleted"))
-                .extract()
-                .as(ContactResponseModel.class);
-        System.out.println("Response message: " + contactResponseModel.getMessage());
-        id=contactModel.getId();
-        System.out.println(id);
+                .assertThat()
+                .statusCode(200)
+                .assertThat().body("message", containsString("updated"));
+        //System.out.println(message);
+        Assert.assertNotEquals(oldEmail,contactModel.getEmail());
+
     }
     @AfterMethod
-    public void postcondition() throws Exception {
+    public void afterMethod() throws Exception {
+
         File logfile=new File("src/logs/testres.log");
         if (!logfile.exists()) {
             logfile.getParentFile().mkdirs();
@@ -91,22 +93,22 @@ public class DeleteContactByID implements TestConfig{
                 .extract()
                 .as(ContactListModel.class);
         for(ContactModel contact : contactListModel.getContacts()) {
-           System.out.println(contact.getId());
-            System.out.println(contact.getName());
-            System.out.println(contact.getLastName());
-            System.out.println(contact.getEmail());
-            System.out.println("--------------------------------");
-            if (!contact.getId().contentEquals(id)) {
-                System.out.println("Contact was added! ID:" +id+ "and not found");
+
+            if (contact.getId().contentEquals(id)) {
+                System.out.println(contact.getId());
+                System.out.println(contact.getName());
+                System.out.println(contact.getLastName());
+                System.out.println(contact.getEmail());
+                System.out.println("--------------------------------");
+                System.out.println("Contact was updated! ID: " +id+ " and found");
+                Assert.assertEquals(contact.getId(), id);
             }
-            Assert.assertNotEquals(contact.getId(), id);
+
 
         }
         printStream.close();
 
 
     }
-
-
 
 }
